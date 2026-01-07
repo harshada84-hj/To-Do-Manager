@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Even & Odd Number Filter</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+
+<div class="container min-vh-100 d-flex justify-content-center align-items-center">
+    <div class="card shadow p-4 w-100" style="max-width: 500px;">
+        <h4 class="text-center text-dark mb-3">Filter Even and Odd Numbers</h4>
+
+        <!-- Input -->
+        <input type="number" id="numberInput" class="form-control mb-3" placeholder="Enter a number">
+
+        <!-- Buttons -->
+        <div class="d-flex flex-wrap gap-2 mb-3">
+            <button class="btn btn-success flex-fill" onclick="addNumber()">Add Number</button>
+            <button class="btn btn-primary flex-fill" onclick="showEven()">Show Even</button>
+            <button class="btn btn-warning flex-fill" onclick="showOdd()">Show Odd</button>
+            <button class="btn btn-danger flex-fill" onclick="clearAll()">Clear</button>
+        </div>
+
+        <!-- Display -->
+        <div class="border-top pt-3">
+            <p class="fw-bold mb-1">All Numbers:</p>
+            <p id="allNumbers">-</p>
+
+            <p class="fw-bold mb-1">Even Numbers:</p>
+            <p id="evenNumbers">-</p>
+
+            <p class="fw-bold mb-1">Odd Numbers:</p>
+            <p id="oddNumbers">-</p>
+        </div>
+    </div>
+</div>
+
+<script>
+    let numbers = [];
+
+    function addNumber() {
+        const input = document.getElementById("numberInput");
+        const value = Number(input.value);
+
+        if (input.value === "") {
+            alert("Please enter a number");
+            return;
+        }
+
+        numbers.push(value);
+        document.getElementById("allNumbers").textContent = numbers.join(", ");
+        input.value = "";
+        input.focus();
+    }
+
+    function showEven() {
+        const even = numbers.filter(num => num % 2 === 0);
+        document.getElementById("evenNumbers").textContent =
+            even.length ? even.join(", ") : "No even numbers";
+    }
+
+    function showOdd() {
+        const odd = numbers.filter(num => num % 2 !== 0);
+        document.getElementById("oddNumbers").textContent =
+            odd.length ? odd.join(", ") : "No odd numbers";
+    }
+
+    function clearAll() {
+        numbers = [];
+        document.getElementById("numberInput").value = "";
+        document.getElementById("allNumbers").textContent = "-";
+        document.getElementById("evenNumbers").textContent = "-";
+        document.getElementById("oddNumbers").textContent = "-";
+    }
+</script>
+
+</body>
+</html>
